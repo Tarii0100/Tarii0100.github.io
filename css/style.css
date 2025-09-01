@@ -1,0 +1,130 @@
+:root{
+  --bg:#0b0f1a;
+  --panel:rgba(255,255,255,.08);
+  --panel-2:rgba(255,255,255,.06);
+  --text:#e8ecf1;
+  --muted:#9aa6b2;
+  --primary:#7cf7cb;
+  --primary-2:#6ad0ff;
+  --accent:#ff7ad9;
+  --ring: 0 0 0 2px rgba(124,247,203,.35), 0 0 24px rgba(106,208,255,.2);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  color:var(--text);
+  background:radial-gradient(1200px 800px at 80% -10%, rgba(122,255,218,.16), transparent 60%),
+             radial-gradient(900px 600px at 10% 0%, rgba(106,208,255,.14), transparent 60%),
+             var(--bg);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, "Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  line-height:1.6;
+}
+
+/* subtle scanlines/noise/grid for “game site” vibe */
+.noise{
+  position:fixed; inset:0; pointer-events:none;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0, rgba(255,255,255,.02) 1px, transparent 1px, transparent 2px);
+  mix-blend-mode:overlay;
+}
+.grid{
+  position: fixed; inset: 0; width:100%; height:100%; object-fit:cover; opacity:.14; pointer-events:none;
+  filter: contrast(1.2);
+}
+.fx-bg{ position:fixed; inset:0; width:100%; height:100%; pointer-events:none; opacity:.5 }
+
+/* header/nav */
+.site-header{
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding:16px 20px; background:rgba(11,15,26,.35); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+.brand{ display:flex; align-items:center; gap:12px }
+.logo{ width:28px; height:28px; filter: drop-shadow(0 0 8px rgba(124,247,203,.5))}
+.title{ margin:0; font-family:"Russo One", system-ui; letter-spacing:.5px; font-size:20px }
+
+.nav{ display:flex; gap:8px; align-items:center; flex-wrap:wrap }
+.nav__link{
+  appearance:none; border:1px solid rgba(255,255,255,.08); background:var(--panel);
+  padding:8px 12px; border-radius:12px; color:var(--text); cursor:pointer;
+  font-weight:600; letter-spacing:.3px;
+}
+.nav__link:hover{ outline:var(--ring) }
+.nav__link.is-active{ background:linear-gradient(135deg, rgba(124,247,203,.18), rgba(106,208,255,.14)); border-color:rgba(124,247,203,.45)}
+.gh{ color:var(--muted); text-decoration:none; border:1px dashed rgba(255,255,255,.18); padding:8px 12px; border-radius:12px }
+.gh:hover{ color:var(--text); border-style:solid }
+
+.container{ max-width:1100px; padding:28px 20px 60px; margin:0 auto }
+.view{ display:none; animation: fade .25s ease }
+.view.is-visible{ display:block }
+@keyframes fade{ from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)} }
+
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px; padding:20px; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+.hero{ text-align:left }
+.hero h2{ font-family:"Russo One"; letter-spacing:.4px; margin:.2em 0 .3em }
+.hero .tag{ color:var(--primary) }
+.hero-cta{ display:flex; gap:12px; margin-top:16px; flex-wrap:wrap }
+
+.grid-2{ display:grid; grid-template-columns: 1fr; gap:16px }
+.gap-lg{ gap:22px }
+@media (min-width:900px){
+  .grid-2{ grid-template-columns: 1fr 1fr }
+}
+
+.label{ display:block; font-weight:600; margin:10px 0 6px }
+.row{ display:flex; align-items:center; gap:12px; margin:10px 0 }
+input[type="text"], input[type="url"], input[type="number"], textarea{
+  width:100%; padding:12px 14px; border-radius:14px; border:1px solid rgba(255,255,255,.2);
+  background: rgba(10,14,25,.6); color:var(--text); outline:none;
+}
+input:focus, textarea:focus{ box-shadow: var(--ring); border-color: rgba(124,247,203,.6) }
+textarea{ resize: vertical }
+
+.switch{ display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none }
+.switch input{ transform: translateY(1px) }
+
+.buttons{ display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 }
+.btn{
+  appearance:none; border:1px solid rgba(255,255,255,.16); background: var(--panel);
+  padding:10px 14px; border-radius:14px; color:var(--text); cursor:pointer; font-weight:700;
+}
+.btn:hover{ box-shadow: var(--ring) }
+.btn.primary{
+  background: linear-gradient(135deg, rgba(124,247,203,.25), rgba(106,208,255,.25));
+  border-color: rgba(124,247,203,.6);
+}
+
+.result{
+  margin-top:14px; padding:14px; border-radius:14px; background:var(--panel-2); border:1px dashed rgba(255,255,255,.18)
+}
+.result.center{ text-align:center; font-size:18px; font-weight:700 }
+.muted{ color:var(--muted) }
+
+.wheel-wrap{ display:grid; place-items:center; gap:12px; margin-top:12px }
+#wheel{ width:100%; max-width:420px; height:auto; border-radius:50%;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.5));
+  background: radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:2px solid rgba(255,255,255,.2)
+}
+.wheel-spin{ width:160px }
+
+.clips{ list-style:none; padding:0; margin:0; display:grid; gap:10px }
+.clip{
+  background:var(--panel); border:1px solid rgba(255,255,255,.15); border-radius:16px; padding:12px;
+}
+.clip h4{ margin:0 0 6px; font-size:15px }
+.clip .meta{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; color:var(--muted); font-size:12px }
+.clip .actions{ margin-top:8px; display:flex; gap:8px; flex-wrap:wrap }
+
+.yt-list{ display:grid; gap:14px }
+.yt-list iframe{ width:100%; aspect-ratio:16/9; border:0; border-radius:16px; background:#000 }
+
+.site-footer{ text-align:center; color:var(--muted); padding:24px 0 40px }
+.list{ margin:0; padding-left:18px }
