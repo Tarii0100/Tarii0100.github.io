@@ -1,32 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ワイのさあヴぁ</title>
-  <meta name="description" content="友達と使えるミニゲーム & 共有サイト" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="icon" href="img/logo.svg" type="image/svg+xml" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Studio Portfolio</title>
+<link rel="stylesheet" href="css/style.css">
+<script defer src="js/load-common.js"></script>
 </head>
 <body>
+<main>
+  <h2>Welcome to Our Studio</h2>
+  <p>Vtuberや映像制作、Web制作などを行うクリエイティブチームのポートフォリオサイトです。</p>
+  <div class="card">
+    <h3>ナビゲーション</h3>
+    <ul>
+      <li><a href="roulette.html">🎡 ルーレット</a></li>
+      <li><a href="clips.html">📝 クリップメモ</a></li>
+      <li><a href="share.html">📺 YouTube共有</a></li>
+    </ul>
+  </div>
+</main>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roulette | Studio Portfolio</title>
+<link rel="stylesheet" href="css/style.css">
+<script defer src="js/load-common.js"></script>
+<script defer src="js/app.js"></script>
+</head>
+<body>
+<main>
+  <h2>🎡 ルーレット</h2>
+  <div class="card">
+    <textarea id="members" rows="3" placeholder="メンバー名を改行で入力"></textarea>
+    <label><input type="checkbox" id="lolMode"> LoLロールモード</label>
+    <div id="teamRow">
+      チーム数：<input type="number" id="teamCount" value="2" min="2" max="4">
+    </div>
+    <div>
+      <button id="assignBtn">チーム割り当て</button>
+      <button id="clearAssign">クリア</button>
+    </div>
+    <div id="assignResult"></div>
+  </div>
 
-  <!-- header.html を読み込ませる-->
-  <iframe src="header.html" frameborder="0"></iframe>
-
-  <main class="container">
-    <!-- HOME を読み込ませる-->
-
-  </main>
-
-  <!-- footer.html -->
-  <footer class="site-footer">
-    <small>© <span id="year"></span> ワイのさあヴぁ — Built for friends • No DB • GitHub Pages ready</small>
-  </footer>
-  
-  <script src="js/app.js" defer></script>
-  
+  <h3>ルーレット</h3>
+  <canvas id="wheel" width="300" height="300"></canvas>
+  <div>
+    <textarea id="rouletteItems" rows="2" placeholder="ルーレット候補を入力（改行またはカンマ区切り）"></textarea>
+    <button id="addMembersToWheel">メンバーを追加</button>
+    <button id="addRolesToWheel">LoLロール追加</button>
+    <button id="spinBtn">回す！</button>
+    <p id="spinResult"></p>
+  </div>
+</main>
 </body>
 </html>
