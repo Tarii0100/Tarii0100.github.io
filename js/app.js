@@ -2,8 +2,6 @@
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 const byId = id => document.getElementById(id);
-const year = new Date().getFullYear();
-byId('year').textContent = year;
 
 // ===== nav/view switch =====
 $$('.nav__link').forEach(btn=>{
