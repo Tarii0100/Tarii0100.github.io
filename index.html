@@ -7,162 +7,26 @@
   <meta name="description" content="友達と使えるミニゲーム & 共有サイト" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- 見出しは無骨、本文は読みやすいフォント -->
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="img/logo.svg" type="image/svg+xml" />
 </head>
 <body>
-  <canvas id="fx-bg" class="fx-bg" aria-hidden="true"></canvas>
-  <div class="noise"></div>
-  <img class="grid" src="img/grid.svg" alt="" aria-hidden="true">
 
-  <header class="site-header">
-    <div class="brand">
-      <img src="img/logo.svg" alt="" class="logo" />
-      <h1 class="title">ワイのさあヴぁ</h1>
-    </div>
-    <nav class="nav">
-      <button class="nav__link is-active" data-view="home">HOME</button>
-      <button class="nav__link" data-view="roulette">ルーレット</button>
-      <button class="nav__link" data-view="clips">クリップ</button>
-      <button class="nav__link" data-view="share">共有</button>
-      <a class="gh" href="https://github.com/" target="_blank" rel="noreferrer">GitHubで編集</a>
-    </nav>
-  </header>
+  <!-- header.html を読み込ませる-->
+  <iframe src="header.html" frameborder="0"></iframe>
 
   <main class="container">
-    <!-- HOME -->
-    <section id="view-home" class="view is-visible">
-      <div class="card hero">
-        <h2>みんなでワイワイするための場</h2>
-        <p>
-          このサイトは、開いている間だけ情報を保持（リロードでリセット）する
-          軽量ツール集です。<br>
-          ルーレットで<span class="tag">LoLのロール</span>や<span class="tag">チーム分け</span>を決めたり、
-          気になるリンクやメモを<span class="tag">クリップ</span>、
-          <span class="tag">YouTube</span>を貼って一緒に観ることもできます。
-        </p>
-        <div class="hero-cta">
-          <button class="btn primary" data-view-jump="roulette">今すぐチーム決め！</button>
-          <button class="btn" data-view-jump="share">動画を共有する</button>
-        </div>
-      </div>
+    <!-- HOME を読み込ませる-->
 
-      <div class="grid-2">
-        <div class="card">
-          <h3>使い方</h3>
-          <ol class="list">
-            <li>上のタブで機能を切り替え</li>
-            <li>入力したデータは<strong>ブラウザ上だけ</strong>に保持（DBなし）</li>
-            <li>GitHub Pagesに配置すればみんなでアクセスOK</li>
-          </ol>
-        </div>
-        <div class="card">
-          <h3>テーマ</h3>
-          <p>最近のゲームサイト風のネオングロー＋グラスモーフィズム。暗所でも映える配色です。</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ROULETTE -->
-    <section id="view-roulette" class="view">
-      <div class="card">
-        <h2>ルーレット / ロール & チーム分け</h2>
-        <p class="muted">入力はページを閉じると消えます（保存なし）。</p>
-
-        <div class="grid-2 gap-lg">
-          <div>
-            <label class="label">メンバー（1行1人）</label>
-            <textarea id="members" rows="8" placeholder="例）&#10;たかは&#10;ゆき&#10;もり&#10;なつ&#10;かい"></textarea>
-
-            <div class="row">
-              <label class="switch">
-                <input type="checkbox" id="lolMode" />
-                <span>LoLロールを使う（TOP/JG/MID/ADC/SUP）</span>
-              </label>
-            </div>
-
-            <div class="row" id="teamRow">
-              <label>チーム数</label>
-              <input id="teamCount" type="number" min="2" max="4" step="1" value="2" />
-            </div>
-
-            <div class="buttons">
-              <button class="btn primary" id="assignBtn">ロール / チームを決める</button>
-              <button class="btn" id="clearAssign">クリア</button>
-            </div>
-
-            <div id="assignResult" class="result"></div>
-          </div>
-
-          <div>
-            <label class="label">ルーレット候補（カンマ / 改行区切り）</label>
-            <textarea id="rouletteItems" rows="6" placeholder="例）焼肉, ラーメン, からあげ, ピザ"></textarea>
-            <div class="buttons">
-              <button class="btn" id="addMembersToWheel">↑ メンバーを候補に</button>
-              <button class="btn" id="addRolesToWheel">↑ LoLロールを候補に</button>
-            </div>
-
-            <div class="wheel-wrap">
-              <canvas id="wheel" width="420" height="420" aria-label="ルーレットキャンバス"></canvas>
-              <button class="btn primary wheel-spin" id="spinBtn">まわす！</button>
-            </div>
-            <div id="spinResult" class="result center"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CLIPS -->
-    <section id="view-clips" class="view">
-      <div class="card">
-        <h2>クリップ / かんたん共有メモ</h2>
-        <div class="grid-2 gap-lg">
-          <div>
-            <label class="label">タイトル</label>
-            <input id="clipTitle" type="text" placeholder="例） scrim連絡" />
-            <label class="label">URL / テキスト</label>
-            <textarea id="clipBody" rows="4" placeholder="https://... または メモ"></textarea>
-            <div class="buttons">
-              <button class="btn primary" id="addClip">追加</button>
-              <button class="btn" id="clearClips">全消去</button>
-            </div>
-          </div>
-          <div>
-            <ul id="clipList" class="clips"></ul>
-          </div>
-        </div>
-        <p class="muted">※ リロードでリセットされます。</p>
-      </div>
-    </section>
-
-    <!-- SHARE -->
-    <section id="view-share" class="view">
-      <div class="card">
-        <h2>共有 / YouTubeを一緒に観る</h2>
-        <div class="grid-2 gap-lg">
-          <div>
-            <label class="label">YouTube URL</label>
-            <input id="ytUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." />
-            <div class="buttons">
-              <button class="btn primary" id="addYt">追加</button>
-              <button class="btn" id="clearYt">全消去</button>
-            </div>
-            <p class="muted">※ 同期再生はしません。各自再生でOK。</p>
-          </div>
-          <div>
-            <div id="ytList" class="yt-list"></div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
+  <!-- footer.html -->
   <footer class="site-footer">
     <small>© <span id="year"></span> ワイのさあヴぁ — Built for friends • No DB • GitHub Pages ready</small>
   </footer>
-
+  
   <script src="js/app.js" defer></script>
+  
 </body>
 </html>
